@@ -5,10 +5,29 @@ import LoginPage from "./pages/LoginPage";
 import TodoPage from "./pages/TodoPage";
 import RegisterPage from "./pages/RegisterPage";
 import PrivateRoute from "./routes/PrivateRoute";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import api from "./utils/api";
 
 function App() {
   const [user, setUser] = useState(null)
+
+  const getUser = async () => {
+    try {
+      const storedToken = sessionStorage.getItem("jwt")
+      if (storedToken) {
+        const response = await api.get("/users/auth")
+        setUser(response.data.user)
+      } else throw new Error("Invalid token")
+      
+    } catch (err) {
+      setUser(null)
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+    getUser()
+  },[])
 
   return (
     <Routes>
@@ -16,13 +35,13 @@ function App() {
         path="/"
         element={
           <PrivateRoute user={user}>
-            <TodoPage />
+            <TodoPage setUser={setUser} />
           </PrivateRoute>
         }
       />
       <Route path="/register" element={<RegisterPage />} />
 
-      <Route path="/login" element={<LoginPage />} />
+      <Route path="/login" element={<LoginPage user={user} setUser={setUser} />} />
     </Routes>
   );
 }

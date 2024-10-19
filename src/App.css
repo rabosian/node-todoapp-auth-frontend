@@ -1,19 +1,17 @@
 body{
-  color: lightblue !important ;
-  background-color: aliceblue !important; 
+  color: #874f41 !important ;
+  background-color: #244855 !important; 
 }
 
-
-
 .todo-item{
-  border: 1px solid lightblue;
-  background-color: white;
-  display: flex;
+  border: 3px solid rgb(46, 44, 44);
+  border-radius: 10px;
+  background-color: #FBE9D0;
   justify-content: space-between;
   align-items: center;
 }
 .todo-content{
-  padding:1em
+  padding: 0.5em
 }
 .add-item-row{
   margin-top:50px !important;
@@ -22,16 +20,14 @@ body{
 .input-box{
   padding: 10px;
   width:100%;
-  border: 1px solid lightblue;
-  
-  
+  border: 2px solid gray;
 }
 .input-box:focus{
   outline: none;
 }
-button{
-  background-color: lightblue;
-  color: white;
+.button-sort{
+  height: 30px;
+  border-radius: 10px;
 }
 .button-add{
   height: 40px;
@@ -41,24 +37,46 @@ button{
   color: white;
 }
 .button-add:hover{
-  background-color: white;
-  color: lightblue;
-  border: 2px solid lightblue;
+  background-color: gray;
+  color: white;
+  border: 2px solid gray;
 }
 .button-delete{
   background-color: white;
-  border: 2px solid lightblue;
+  border: white;
+  border-radius: 10px;
   color: lightblue;
   margin: 10px;
 }
 .button-delete:hover{
-  background-color: lightblue;
+  background-color: #e64833;
   color: #ffffff;
 }
-
+.button-update{
+  background-color: white;
+  border: white;
+  border-radius: 10px;
+  color: lightblue;
+  margin: 10px;
+}
+.button-update:hover{
+  background-color: gray;
+  color: #ffffff;
+}
 .item-complete{
   background-color: gainsboro;
-  color:white;
+  color:gray;
+}
+
+.button-logout{
+  background-color: white;
+  border: white;
+  color: black;
+  margin: 10px;
+}
+.button-logout:hover{
+  background-color: gray;
+  color: #ffffff;
 }
 
 .login-box{

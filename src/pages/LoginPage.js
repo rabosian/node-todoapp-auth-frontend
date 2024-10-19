@@ -3,13 +3,12 @@ import api from "../utils/api";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
-const LoginPage = () => {
+const LoginPage = ({ user, setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("")
-  const [userData, setUserData] = useState(null)
   const navigate = useNavigate();
 
   const loginHandler = async (event) => {
@@ -18,10 +17,8 @@ const LoginPage = () => {
     try {
       const response = await api.post("/users/login", { email, password });
       if (response.status === 200) {
-        setUserData(response.data.user)
+        setUser(response.data.user)
         sessionStorage.setItem("jwt", response.data.token)
-        api.defaults.headers["authorization"] = "Bearer " + response.data.token
-        
         navigate("/");
       } else {
         throw new Error(`${response.data.error}`);
@@ -31,6 +28,9 @@ const LoginPage = () => {
     }
   };
 
+  if (user) {
+    return <Navigate to="/" />
+  }
   return (
     <div className="display-center">
       <Form className="login-box" onSubmit={loginHandler}>
