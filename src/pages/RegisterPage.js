@@ -13,10 +13,12 @@ const RegisterPage = () => {
   const [signupError, setSignupError] = useState("");
   const navigate = useNavigate();
 
-  const submitHandler = async (event) => {
+  const signupHandler = async (event) => {
     event.preventDefault();
+    setSignupError("")
     try {
       if (password !== passwordConfirm) {
+        setPasswordError("Password doesn't match");
         throw new Error("Password doesn't match");
       }
       const response = await api.post("/users/signup", {
@@ -27,10 +29,10 @@ const RegisterPage = () => {
       if (response.status === 200) {
         navigate("/");
       } else {
-        throw new Error(`redirect failed due to ${response.data.error}`);
+        throw new Error(`signup failed: ${response.data.error}`);
       }
     } catch (err) {
-      setPasswordError(err.message);
+      setSignupError(err.message);
     }
   };
 
@@ -77,11 +79,10 @@ const RegisterPage = () => {
         </Form.Group>
 
         <div className="button-box">
-          {" "}
           <Button
             className="button-primary"
             type="submit"
-            onClick={submitHandler}
+            onClick={signupHandler}
           >
             회원가입
           </Button>
