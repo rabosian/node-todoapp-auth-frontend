@@ -8,28 +8,28 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 const LoginPage = ({ user, setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loginError, setLoginError] = useState("")
+  const [loginError, setLoginError] = useState("");
   const navigate = useNavigate();
 
   const loginHandler = async (event) => {
     event.preventDefault();
-    setLoginError("")
+    setLoginError("");
     try {
       const response = await api.post("/users/login", { email, password });
       if (response.status === 200) {
-        setUser(response.data.user)
-        sessionStorage.setItem("jwt", response.data.token)
+        setUser(response.data.user);
+        sessionStorage.setItem("jwt", response.data.token);
         navigate("/");
       } else {
         throw new Error(`${response.data.error}`);
       }
     } catch (err) {
-      setLoginError(err.error)
+      setLoginError(err.error);
     }
   };
 
   if (user) {
-    return <Navigate to="/" />
+    return <Navigate to="/" />;
   }
   return (
     <div className="display-center">
@@ -57,9 +57,9 @@ const LoginPage = ({ user, setUser }) => {
           <Button type="submit" className="button-primary">
             Login
           </Button>
-          <span>
-            계정이 없다면? <Link to="/register">회원가입 하기</Link>
-          </span>
+          <Button variant="secondary">
+            <Link to="/register" className="custom-link">Sign up</Link>
+          </Button>
         </div>
       </Form>
     </div>

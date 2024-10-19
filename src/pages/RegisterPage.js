@@ -1,32 +1,36 @@
 import React, { useState } from "react";
-import api from "../utils/api"
+import api from "../utils/api";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [passwordError, setPasswordError] = useState("")
-  const [signupError, setSignupError] = useState("")
-  const navigate = useNavigate()
+  const [passwordError, setPasswordError] = useState("");
+  const [signupError, setSignupError] = useState("");
+  const navigate = useNavigate();
 
   const submitHandler = async (event) => {
     event.preventDefault();
     try {
       if (password !== passwordConfirm) {
-        throw new Error("Password doesn't match")
+        throw new Error("Password doesn't match");
       }
-      const response = await api.post('/users/signup', { name, email, password})
-      if(response.status ===200) {
-        navigate('/')
+      const response = await api.post("/users/signup", {
+        name,
+        email,
+        password,
+      });
+      if (response.status === 200) {
+        navigate("/");
       } else {
-        throw new Error(`redirect failed due to ${response.data.error}`)
+        throw new Error(`redirect failed due to ${response.data.error}`);
       }
     } catch (err) {
-      setPasswordError(err.message)
+      setPasswordError(err.message);
     }
   };
 
@@ -69,12 +73,26 @@ const RegisterPage = () => {
             placeholder="Confirm password"
             onChange={(event) => setPasswordConfirm(event.target.value)}
           />
-        {passwordError && <div>{passwordError}</div>}
+          {passwordError && <div>{passwordError}</div>}
         </Form.Group>
 
-        <Button className="button-primary" type="submit" onClick={submitHandler}>
-          회원가입
-        </Button>
+        <div className="button-box">
+          {" "}
+          <Button
+            className="button-primary"
+            type="submit"
+            onClick={submitHandler}
+          >
+            회원가입
+          </Button>
+          <span>
+            Already have an account?
+            {" "} 
+            <Button variant="secondary">
+              <Link to="/login" className="custom-link">Login</Link>
+            </Button>
+          </span>
+        </div>
       </Form>
     </div>
   );
