@@ -19,6 +19,7 @@ const LoginPage = ({ user, setUser }) => {
       if (response.status === 200) {
         setUser(response.data.user);
         sessionStorage.setItem("jwt", response.data.token);
+        api.defaults.headers["authorization"] = "Bearer " + response.data.token
         navigate("/");
       } else {
         throw new Error(`${response.data.error}`);
