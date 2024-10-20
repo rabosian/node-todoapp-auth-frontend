@@ -15,6 +15,7 @@ const RegisterPage = () => {
 
   const signupHandler = async (event) => {
     event.preventDefault();
+    setPasswordError("")
     setSignupError("")
     try {
       if (password !== passwordConfirm) {
@@ -32,7 +33,7 @@ const RegisterPage = () => {
         throw new Error(`signup failed: ${response.data.error}`);
       }
     } catch (err) {
-      setSignupError(err.message);
+      setSignupError(err.error);
     }
   };
 
