@@ -4,7 +4,7 @@ const api = axios.create({
   baseURL: `${process.env.REACT_APP_BACKEND_URL}/api`,
   headers: {
     "Content-Type": "application/json",
-    authorization: "Bearer " + sessionStorage.getItem("jwt"),
+    authorization: "Bearer " + (sessionStorage.getItem("jwt") ? sessionStorage.getItem("jwt") : localStorage.getItem("refreshToken")),
   },
 });
 /**
