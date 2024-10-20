@@ -13,8 +13,9 @@ function App() {
 
   const getUser = async () => {
     try {
-      const storedToken = sessionStorage.getItem("jwt")
-      if (storedToken) {
+      const accessToken = sessionStorage.getItem("jwt")
+      const refreshToken = localStorage.getItem("refreshToken")
+      if (accessToken || refreshToken) {
         const response = await api.get("/users/auth")
         setUser(response.data.user)
       } else throw new Error("Invalid token")
