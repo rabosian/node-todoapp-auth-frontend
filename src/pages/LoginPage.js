@@ -18,8 +18,9 @@ const LoginPage = ({ user, setUser }) => {
       const response = await api.post("/users/login", { email, password });
       if (response.status === 200) {
         setUser(response.data.user);
-        sessionStorage.setItem("jwt", response.data.token);
-        api.defaults.headers["authorization"] = "Bearer " + response.data.token
+        sessionStorage.setItem("jwt", response.data.accessToken);
+        localStorage.setItem("refreshToken", response.data.refreshToken);
+        api.defaults.headers["authorization"] = "Bearer " + response.data.accessToken
         navigate("/");
       } else {
         throw new Error(`${response.data.error}`);

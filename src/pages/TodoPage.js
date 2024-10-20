@@ -23,7 +23,7 @@ const TodoPage = ({ setUser }) => {
     setTodoList(response.data.data);
   };
 
-  const addTodo = async () => {
+  const addTask = async () => {
     try {
       const response = await api.post("/tasks", {
         taskName: todoValue,
@@ -38,7 +38,7 @@ const TodoPage = ({ setUser }) => {
     }
   };
 
-  const deleteItem = async (id) => {
+  const deleteTask = async (id) => {
     try {
       console.log(id);
       const response = await api.delete(`/tasks/${id}`);
@@ -76,6 +76,7 @@ const TodoPage = ({ setUser }) => {
 
   const handleLogout = () => {
     sessionStorage.removeItem("jwt");
+    localStorage.removeItem("refreshToken")
     setUser(null);
     navigate("/login");
   };
@@ -110,7 +111,7 @@ const TodoPage = ({ setUser }) => {
           />
         </Col>
         <Col xs={12} sm={2}>
-          <button onClick={addTodo} className="button-add">
+          <button onClick={addTask} className="button-add">
             추가
           </button>
         </Col>
@@ -120,7 +121,7 @@ const TodoPage = ({ setUser }) => {
         todoList={todoList}
         sortItems={sortItems}
         isSorted={isSorted}
-        deleteItem={deleteItem}
+        deleteTask={deleteTask}
         toggleComplete={toggleComplete}
       />
     </Container>

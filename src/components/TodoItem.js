@@ -1,7 +1,7 @@
 import React from "react";
 import { Col } from "react-bootstrap";
 
-const TodoItem = ({ item, deleteItem, toggleComplete }) => {
+const TodoItem = ({ item, deleteTask, toggleComplete }) => {
   return (
       <Col xs={12} sm={6} md={4} lg={3} className="mb-2">
         <div className={`todo-item ${item.isComplete ? "item-complete" : ""}`}>
@@ -11,7 +11,7 @@ const TodoItem = ({ item, deleteItem, toggleComplete }) => {
             <button
               className="button-delete"
               aria-label="Delete task"
-              onClick={() => deleteItem(item._id)}
+              onClick={() => deleteTask(item._id)}
             >
               ❌
             </button>

@@ -6,7 +6,7 @@ const TodoBoard = ({
   todoList,
   isSorted,
   sortItems,
-  deleteItem,
+  deleteTask,
   toggleComplete,
 }) => {
   return (
@@ -28,7 +28,7 @@ const TodoBoard = ({
           (todoList.map((item) => (
             <TodoItem
               item={item}
-              deleteItem={deleteItem}
+              deleteTask={deleteTask}
               toggleComplete={toggleComplete}
             />
           ))) : <h2>There is no item to show</h2>}
