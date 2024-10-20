@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TodoItem from "./TodoItem";
 import { Col, Row } from "react-bootstrap";
 
@@ -27,7 +27,9 @@ const TodoBoard = ({
         {todoList.length > 0 ? 
           (todoList.map((item) => (
             <TodoItem
+              commentList={item.comments}
               item={item}
+              taskId={item._id}
               deleteItem={deleteItem}
               toggleComplete={toggleComplete}
             />

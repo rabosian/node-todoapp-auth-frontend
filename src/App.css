@@ -9,9 +9,14 @@ body {
   background-color: #fbe9d0;
   justify-content: space-between;
   align-items: center;
+  padding: 10px;
 }
-.todo-content {
-  padding: 0.5em;
+
+.todo-name {
+  color: black;
+}
+.todo-author {
+  font-size: 0.8em
 }
 .add-item-row {
   margin-top: 50px !important;
@@ -112,4 +117,8 @@ body {
 .custom-link {
   color: inherit;
   text-decoration: none;
+}
+
+.button-comment {
+  margin-right: 5px;
 }
